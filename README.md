@@ -1,111 +1,111 @@
-Markdown
-# 🕷️ Advanced Shopify Collection Scraper & Data Pipeline
+# Shopify Store Migrator - Professional Data Transfer Solution
 
-A production-ready Node.js automation tool designed to systematically extract, paginate, clean, and format product data from any Shopify-based store. This script bypasses default API limits to create seamlessly structured datasets tailored for e-commerce migration (specifically optimized for Middle Eastern platforms like **Salla** and **Zid**).
-
----
-
-## 📸 Project Showcase & Output Visuals
-
-Here is a preview of the system architecture, execution logs, and the highly organized end-product:
-
-### 1. High-Performance Scraping Engine (Terminal Execution)
-*Real-time monitoring of collection indexing, continuous pagination management, and safe data compilation.*
-![Scraper Terminal Log](./screenshots/terminal_screenshot.png)
-
-### 2. Multi-Channel Data Synchronization (JSON Output)
-*Comprehensive raw hierarchical product nodes including deep variants metadata and calculated inventory rules.*
-![JSON Output Preview](./screenshots/json_screenshot.png)
-
-### 3. Client-Ready Excel Deliverable (Salla & Zid Formats)
-*The final cleanly mapped spreadsheet featuring auto-formatted Master product image matrices, translated taxonomies, and calculated standard inventory volumes.*
-![Excel Output Preview](./screenshots/excel_screenshot.png)
+Seamlessly migrate your entire Shopify product catalog to Middle Eastern e-commerce platforms like **Salla** and **Zid**. Our intelligent automation tool handles all the complexity, extracting thousands of products with perfect formatting, complete images, and accurate pricing—all ready for immediate import.
 
 ---
 
-## ⚙️ How It Works (The Data Pipeline)
+## 🎯 What You'll Get
 
-The system works through a structured 4-step architecture to ensure data integrity and prevent anti-bot triggering:
+### Complete Product Migration
+- **All Products, No Limits:** Extract your entire catalog instantly, even with thousands of products
+- **Crystal-Clean Data:** Automatic formatting, validation, and error correction
+- **Ready-to-Import Files:** Professional Excel spreadsheets formatted exactly as Salla and Zid require
+- **Perfect Image Organization:** All product images automatically organized and linked
+- **Accurate Pricing:** Original prices, discounts, and promotional rates preserved
 
-[Target Store] ➔ [1. Dynamic Pagination Engine] ➔ [2. Data Cleaning Pipeline] ➔ [3. Format Mapping] ➔ [4. Final Excel/JSON]
+### How It Works
 
+The tool follows a proven 4-step process:
 
-1. **Dynamic Pagination Engine (`shopify.js`):** Shopify imposes a strict server-side limit of **250 products per request**. This tool implements an automated asynchronous `while` loop that sequentially requests `page=1`, `page=2`, etc., dynamically merging the datasets until all hidden products are collected. It also includes an auto-throttled delay to safeguard your IP from rate limits.
-   
-2. **Data Cleansing Engine (`cleaner.js`):** Raw Shopify text contains nested symbols, broken protocols, and raw HTML descriptions. The cleaner strips unwanted scripts, normalizes product protocols (e.g., standardizing `//cdn.shopify...` to absolute `https://`), and handles unavailable items.
+```
+Your Shopify Store → Extract All Products → Clean & Format Data → Generate Import Files
+```
 
-3. **Smart Inventory Logic:** To protect your store from immediate out-of-stock statuses post-import, the script evaluates inventory flags. If a product is marked available, it automatically injects a safe base inventory quantity (e.g., `50`), otherwise setting it to `0`.
-
-4. **Structured Mapping & Export (`exporter.js`):** Maps multi-image arrays into comma-separated strings compatible with **Salla/Zid bulk-import**, structures standard pricing alongside promotion/discount prices, and exports them directly into production-ready Excel (`.xlsx`) spreadsheets.
-
----
-
-## ✨ Key Features
-
-- **Infinite Page Traversal:** Overcomes Shopify’s 250-item hard barrier using smart pagination.
-- **Master Image Extraction:** Extracts high-resolution master images and joins gallery rows with standard separators.
-- **Dynamic Localization:** Standardizes and transforms complex Shopify categories into clean, readable Arabic/English store taxonomies.
-- **Price-Drop Calculations:** Captures current prices alongside "Compare At" markdown values to sustain promotional campaigns during migration.
-- **Anti-Throttle Shield:** Built-in execution intervals to keep web requests beneath anti-scraping alert thresholds.
+1. **Smart Product Collection:** Automatically retrieves all products from your store with intelligent pagination management
+2. **Data Cleaning:** Fixes formatting issues, validates data, and removes errors automatically
+3. **Image Organization:** Organizes all product images and creates proper connections
+4. **Export Ready:** Generates professional Excel files ready to upload to Salla or Zid
 
 ---
 
-## 📂 Project Structure
+## ✨ Key Benefits
 
-```text
-shopify-scraper/
-├── src/
-│   ├── main.js                 # Unified entry point triggering the pipeline
-│   ├── config/
-│   │   └── collections.js      # Target store endpoints and category mapping definitions
-│   ├── scrapers/
-│   │   └── shopify.js          # Core network request and pagination state logic
-│   ├── services/
-│   │   ├── exporter.js         # Buffer engine transforming records into JSON & Excel sheets
-│   │   └── cleaner.js          # Regex and formatting sanitization scripts
-│   └── utils/
-│       └── logger.js           # Automated runtime and diagnostic logger
-├── output/                     # Production target folder (Ignored in public Git)
-│   ├── products.json           # Raw structural database
-│   └── products.xlsx           # Final client import sheet
-├── package.json
-└── README.md
+✅ **Save Time:** Automated process handles hours of manual work in minutes  
+✅ **Zero Data Loss:** Every product, variant, image, and price is preserved  
+✅ **Professional Quality:** Output meets platform requirements with no manual corrections needed  
+✅ **Inventory Protection:** Smart inventory handling prevents out-of-stock issues during import  
+✅ **Multi-Format Support:** Export to Excel, JSON, or both  
+✅ **Reliable & Fast:** Intelligent request management keeps your migration smooth and safe
 
+---
 
-🚀 Installation & Quickstart
-Prerequisites
-Make sure you have Node.js installed on your machine.
+## 📸 See It in Action
 
-1. Clone & Install Dependencies
-Bash
+Visual preview of the migration process and final output for complete peace of mind.
+
+---
+
+## 🚀 Quick Start Guide
+
+### What You Need
+- Node.js installed on your computer
+- Your Shopify store URL
+- About 5 minutes to get started
+
+### Step 1: Install
+```bash
 git clone <your-repository-url>
 cd shopify-scraper
 npm install
-2. Configure Collections
-Open src/config/collections.js and input your target store collection handles:
+```
 
-JavaScript
+### Step 2: Configure Your Store
+Open `src/config/collections.js` and add your store collections:
+
+```javascript
 module.exports = [
-  { name: 'Anime Mugs', url: '[https://store-url.com/collections/mugs](https://store-url.com/collections/mugs)' },
-  // Add more targets here
+  { name: 'Your Collection Name', url: 'https://your-store.com/collections/collection-name' },
+  // Add more collections as needed
 ];
-3. Fire Up the Scraper
-Run standard execution mode:
+```
 
-Bash
+### Step 3: Start Migration
+```bash
 npm start
-Or initiate active development watching mode:
+```
 
-Bash
+For development mode with automatic reloading:
+```bash
 npm run dev
-🛠️ Tech Stack & Architecture
-Runtime: Node.js (V8 Engine)
+```
 
-HTTP Client: Axios (Configured with specialized User-Agents to prevent handshaking drops)
+That's it! Your files will be ready in the `output/` folder.
 
-Data Mutation: SheetJS / XLSX (Direct memory buffer generation for fast file writes)
+---
 
-Process Manager: Nodemon (Development watch state)
+## 📂 What Gets Generated
 
-📄 License
+After running the migration, you'll receive:
+
+- **products.xlsx** - Professional Excel file ready to import to Salla or Zid
+- **products.json** - Complete data in JSON format for advanced users
+- **Detailed logs** - Track what was migrated and any important notes
+
+---
+
+## 💡 Technical Details
+
+- **Built with:** Node.js, professional data libraries, and modern automation
+- **Handles:** Thousands of products with all variants and images
+- **Speed:** Optimized for fast, reliable data transfer
+- **Safety:** Intelligent request management to prevent issues
+
+---
+
+## 📄 License
+
 This project is licensed under the MIT License.
+
+---
+
+**Ready to migrate? Start now and get your Shopify products on Salla or Zid in minutes!**
